@@ -11,20 +11,16 @@ class StartPage {
   createDOM() {
     this.bottonStart = document.createElement("button");
     this.bottonStart.textContent = "START";
-    this.container = document.getElementById("main-container")
+
   }
 
   setEvents() {
-    this.bottonStart.addEventListener("click", this.load)
+    this.bottonStart.addEventListener("click", () => this.game.start())
   }
-  load() {
 
-    const pregunta = new Preguntas()
-    pregunta.render()
-  }
   render() {
 
-    this.container.append(this.bottonStart);
+    this.game.container.append(this.bottonStart)
   }
 }
 

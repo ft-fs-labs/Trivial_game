@@ -2,18 +2,23 @@
 import PantallaFin from "./PantallaFin.js"
 
 class Preguntas {
-    constructor() {
+    constructor(game) {
+        this.game = game
+
         this.createDOM()
         this.setEvents()
     }
     createDOM(){
         this.btnPregunta = document.createElement("button")
         this.btnPregunta.innerHTML= "Nueva Pregunta"
-        this.containerDOM = document.getElementById("main-container")
+       
     }
 
     setEvents(){
-        this.btnPregunta.addEventListener("click", this.load)
+        this.btnPregunta.addEventListener("click", () => {
+
+            this.game.updateRightAnswer()
+        })
     }
 
     load(){
@@ -22,7 +27,7 @@ class Preguntas {
     }
 
     render(){
-        this.containerDOM.appendChild(this.btnPregunta)
+        this.game.container.appendChild(this.btnPregunta)
     }
 
 }
