@@ -18,3 +18,5 @@ class Pregunta {
 }
 const pregunta = new Pregunta()
 pregunta.start()
+
+export default Pregunta; 
