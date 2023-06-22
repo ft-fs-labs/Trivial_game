@@ -1,4 +1,4 @@
-import CounterPage from "./js/CounterPage.js";
+import StartPage from "./js/StartPage.js";
 
 class Game {
   constructor() {
