@@ -1,5 +1,7 @@
 
-class Pregunta {
+import PantallaFin from "./PantallaFin.js"
+
+class Preguntas {
     constructor() {
         this.createDOM()
         this.setEvents()
@@ -15,8 +17,8 @@ class Pregunta {
     }
 
     load(){
-        const pantallaFinal = new PantallaFinal()
-        pantallaFinal.render()
+        const pantallaFin = new PantallaFin()
+        pantallaFin.render()
     }
 
     render(){
@@ -24,8 +26,6 @@ class Pregunta {
     }
 
 }
-const pregunta = new Pregunta()
-pregunta.render()
 
-export default Pregunta
+export default Preguntas
 

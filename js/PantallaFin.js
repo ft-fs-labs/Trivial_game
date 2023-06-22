@@ -1,11 +1,12 @@
-import Pregunta from "./Preguntas.js"
+import Preguntas from "./Preguntas.js"
 
 class PantallaFin{
     constructor(){
-        
+        this.createDOM()
+        this.setEvent()
     }
-    createDom(){
-        this.createDom = document.getElementById("main-container")
+    createDOM(){
+        this.containerDOM = document.getElementById("main-container")
 
         this.btn = document.createElement('button')
         this.btn.innerText = 'Volver a cargar el juego'
@@ -14,25 +15,21 @@ class PantallaFin{
         this.score.innerText = 'SCORE'
     }
     render(){
-        
-        this.createDom.appendChild(this.btn);
-        
-        
-        this.createDom.append(this.score);
+
+        this.containerDOM.append(this.btn, this.score)
     }
     setEvent(){
         this.btn.addEventListener('click', this.load)
     }
     
     load(){
-        const preguntas = new Pregunta()
-        Pregunta.render()
+        const preguntas = new Preguntas()
+        
+        preguntas.render()
+        
     }
+ 
   
 }
-
-
-const pantallaFin = new PantallaFin()
-pantallaFin.render();
 
 export default PantallaFin;
