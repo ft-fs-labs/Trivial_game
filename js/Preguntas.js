@@ -1,20 +1,30 @@
-const containerDOM = document.getElementById("main-container")
+
 class Pregunta {
     constructor() {
+        this.createDOM()
+        this.setEvents()
+    }
+    createDOM(){
         this.btnPregunta = document.createElement("button")
         this.btnPregunta.innerHTML= "Nueva Pregunta"
+        this.containerDOM = document.getElementById("main-container")
     }
 
-    start() {
-        containerDOM.appendChild(this.btnPregunta)
+    setEvents(){
         this.btnPregunta.addEventListener("click", this.load)
     }
 
     load(){
         const pantallaFinal = new PantallaFinal()
-        pantallaFinal.start()
+        pantallaFinal.render()
+    }
+
+    render(){
+        this.containerDOM.appendChild(this.btnPregunta)
     }
 
 }
 const pregunta = new Pregunta()
-pregunta.start()
+pregunta.render()
+
+export default Pregunta
