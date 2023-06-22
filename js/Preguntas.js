@@ -28,3 +28,4 @@ const pregunta = new Pregunta()
 pregunta.render()
 
 export default Pregunta
+
