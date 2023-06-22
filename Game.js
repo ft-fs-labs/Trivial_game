@@ -1,6 +1,8 @@
+
 import CounterPage from "./js/CounterPage.js";
 import PantallaFinn from "./js/pantalla-fin.js";
 import Pregunta from "./Preguntas.js"
+
 
 
 class Game {
