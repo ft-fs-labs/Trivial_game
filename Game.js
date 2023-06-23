@@ -9,7 +9,7 @@ class Game {
   constructor() {
 
     this.score = 0
-    this.quenstions = []
+    this.questions = []
     this.container = document.createElement('div')
     document.body.append(this.container)
     this.currentPage = undefined;
@@ -43,11 +43,21 @@ class Game {
     fetch('https://the-trivia-api.com/v2/questions')
     .then((res) => res.json())
     .then((data) => {
-      console.log(data)
-    })
+      for ( let i=0; i < data.lenght; i++){
+        data[i]
+        const questionsText = data[i].question.text
+         console.log(questionsText)
+    }})
       }
-      bringQuestions()
       
-    }
+     
+  }
+ 
 
 
+
+    
+    
+const game = new Game()
+game.bringQuestions()
+export default Game
