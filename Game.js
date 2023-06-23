@@ -1,29 +1,42 @@
-import CounterPage from "./js/CounterPage.js";
-import PantallaFinn from "./js/pantalla-fin.js";
-import Pregunta from "./Preguntas.js"
+
+import StartPage from "./js/StartPage.js";
+import Preguntas from "./js/Preguntas.js";
+import PantallaFin from "./js/PantallaFin.js";
+
 
 
 class Game {
   constructor() {
-    this.counter = 0;
 
-    this.container = document.createElement("div");
-    document.body.append(this.container);
-
+    this.score = 0
+    this.quenstions = []
+    this.container = document.createElement('div')
+    document.body.append(this.container)
     this.currentPage = undefined;
 
-    this.load(new CounterPage(this));
+    this.load(new StartPage(this));
   }
 
-  increment() {
-    this.counter++;
-    this.currentPage.render();
+
+  start() {
+    this.score = 0
+    this.load(new Preguntas(this))
   }
+
+  updateRightAnswer() {
+    this.score += 5
+
+    this.load(new PantallaFin(this))
+  }
+
 
   load(page) {
+
+    this.container.innerHTML = ""
     this.currentPage = page;
     this.container.innerHTML = "";
     page.render();
+    
   }
 }
 
