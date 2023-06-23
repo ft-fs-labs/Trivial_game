@@ -22,8 +22,7 @@ class Preguntas {
             this.game.score += 5
             this.render()
             if(this.index > this.game.questions.length -1){
-                this.game.updateRightAnswer()
-                
+                this.game.updateRightAnswer() 
             }
         })
     }
@@ -32,6 +31,11 @@ class Preguntas {
         this.question.innerHTML = this.game.questions[this.index]
         this.game.container.appendChild(this.question) 
         this.game.container.appendChild(this.btnPregunta)
+    }
+    startTime(){
+        setTimeout(() => {
+        console.log("clase del boton/input");
+      }, 3000);
     }
 
 }

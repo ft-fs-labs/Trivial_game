@@ -18,6 +18,7 @@ class PantallaFin{
 
     setEvent(){
         this.btn.addEventListener('click',() => {
+            this.game.questions = []
             this.game.start()
         })
     }
@@ -25,9 +26,8 @@ class PantallaFin{
     render(){
         this.scoreScreen.textContent = `Score: ${this.game.score}`
         this.game.container.append(this.btn, this.scoreScreen)
+
     }
-
-
  
   
 }
