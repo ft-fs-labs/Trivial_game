@@ -10,7 +10,7 @@ class Game {
 
     this.score = 0
 
-    this.questions = ["Pregunta 1", "Pregunta 2","Pregunta 3","Pregunta 4"]
+    this.questions = []
 
     this.container = document.createElement('div')
     document.body.append(this.container)
@@ -44,11 +44,10 @@ class Game {
     fetch('https://the-trivia-api.com/v2/questions')
     .then((res) => res.json())
     .then((data) => {
-      for ( let i=0; i < data.lenght; i++){
-        data[i]
-        const questionsText = data[i].question.text
-         console.log(questionsText)
-    }})
+      for ( let i=0; i < data.length; i++){
+       this.questions.push(data[i].question.text)
+       
+    }console.log(this.questions)})
       }
       
      

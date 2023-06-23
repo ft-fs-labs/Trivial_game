@@ -12,6 +12,7 @@ class StartPage {
     this.bottonStart = document.createElement("button");
     this.bottonStart.textContent = "START";
 
+  
   }
 
   setEvents() {
