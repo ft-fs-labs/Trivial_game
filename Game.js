@@ -11,7 +11,9 @@ class Game {
     this.score = 0
 
     this.questions = []
-
+  this.correctAnswers = ''
+  this.incorrectAnswers =[]
+  this.allAnswers= []
     this.container = document.createElement('div')
     document.body.append(this.container)
     this.currentPage = undefined;
@@ -46,12 +48,16 @@ class Game {
     .then((data) => {
       for ( let i=0; i < data.length; i++){
        this.questions.push(data[i].question.text)
+        this.incorrectAnswers.push(data[i].incorrectAnswers) 
+        this.correctAnswers.push(data[i].correctAnswers)
+ 
+    }this.allAnswers= this.incorrectAnswers.push(this.correctAnswers) 
+   
+   }
+    ) 
+     }
        
-    }console.log(this.questions)})
-      }
-      
-     
-  }
+         }
  
 
 
