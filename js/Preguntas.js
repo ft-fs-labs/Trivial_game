@@ -29,6 +29,11 @@ class Preguntas {
     render(){
         this.game.container.appendChild(this.btnPregunta)
     }
+    startTime(){
+        setTimeout(() => {
+        console.log("clase del boton/input");
+      }, 3000);
+    }
 
 }
 

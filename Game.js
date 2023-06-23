@@ -38,6 +38,7 @@ class Game {
     page.render();
     
   }
+  
 }
 
 export default Game;
