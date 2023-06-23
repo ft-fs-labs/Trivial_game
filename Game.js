@@ -23,7 +23,6 @@ class Game {
   start() {
     this.score = 0
     this.bringQuestions()
-    
   }
 
 
