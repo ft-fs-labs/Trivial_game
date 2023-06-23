@@ -9,7 +9,7 @@ class Game {
   constructor() {
 
     this.score = 0
-    this.quenstions = []
+    this.questions = ["Pregunta 1", "Pregunta 2","Pregunta 3","Pregunta 4"]
     this.container = document.createElement('div')
     document.body.append(this.container)
     this.currentPage = undefined;
@@ -23,12 +23,11 @@ class Game {
     this.load(new Preguntas(this))
   }
 
+
   updateRightAnswer() {
-    this.score += 5
 
     this.load(new PantallaFin(this))
   }
-
 
   load(page) {
 

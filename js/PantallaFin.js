@@ -23,7 +23,7 @@ class PantallaFin{
     }
 
     render(){
-        this.scoreScreen.textContent = this.game.score
+        this.scoreScreen.textContent = `Score: ${this.game.score}`
         this.game.container.append(this.btn, this.scoreScreen)
     }
 
