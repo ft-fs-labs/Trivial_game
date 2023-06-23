@@ -26,6 +26,17 @@ class Game {
     this.currentPage = page;
     page.render();
   }
-}
 
-export default Game;
+
+  bringQuestions(){
+    fetch('https://the-trivia-api.com/v2/questions')
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+    })
+      }
+      bringQuestions()
+      
+    }
+
+
