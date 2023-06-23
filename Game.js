@@ -36,6 +36,7 @@ class Game {
 
     this.container.innerHTML = ""
     this.currentPage = page;
+    this.container.innerHTML = "";
     page.render();
 
   }
