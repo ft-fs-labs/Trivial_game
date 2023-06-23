@@ -1,0 +1,42 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+body{
+    max-width: 50%;
+    margin: 0 auto;
+    
+}
+div {
+    background-color: black;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+button{
+    background-color: blueviolet;
+    height: 100px;
+    padding: 20px;
+    font-size: x-large;
+   
+}
+button:active{
+    background-color: brown;
+}
+p{
+    background-color: aliceblue;
+    width: 50px;
+    height: 98px;
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
