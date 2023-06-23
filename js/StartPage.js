@@ -20,7 +20,6 @@ class StartPage {
   }
 
   render() {
-
     this.game.container.append(this.bottonStart)
   }
 }

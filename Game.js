@@ -22,7 +22,8 @@ class Game {
 
   start() {
     this.score = 0
-    this.load(new Preguntas(this))
+    this.bringQuestions()
+    
   }
 
 
@@ -36,28 +37,22 @@ class Game {
     this.container.innerHTML = ""
     this.currentPage = page;
     page.render();
-    
+
   }
 
-
-  bringQuestions(){
+  bringQuestions() {
     fetch('https://the-trivia-api.com/v2/questions')
-    .then((res) => res.json())
-    .then((data) => {
-      for ( let i=0; i < data.length; i++){
-       this.questions.push(data[i].question.text)
-       
-    }console.log(this.questions)})
-      }
-      
-     
+      .then((res) => res.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          this.questions.push(data[i].question.text)
+        }
+        this.load(new Preguntas(this))
+        
+      })
   }
- 
 
 
+}
 
-    
-    
-const game = new Game()
-game.bringQuestions()
 export default Game

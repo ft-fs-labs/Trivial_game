@@ -22,8 +22,7 @@ class Preguntas {
             this.game.score += 5
             this.render()
             if(this.index > this.game.questions.length -1){
-                this.game.updateRightAnswer()
-                
+                this.game.updateRightAnswer() 
             }
         })
     }
