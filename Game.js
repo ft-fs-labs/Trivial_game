@@ -22,6 +22,7 @@ class Game {
 
   load(page) {
     this.currentPage = page;
+    this.container.innerHTML = "";
     page.render();
   }
 }
