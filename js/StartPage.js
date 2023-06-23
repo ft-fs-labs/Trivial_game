@@ -1,4 +1,6 @@
-class CounterPage {
+import Preguntas from "./Preguntas.js";
+
+class StartPage {
   constructor(game) {
     this.game = game;
 
@@ -7,25 +9,19 @@ class CounterPage {
   }
 
   createDOM() {
-    this.bottonStart= document.createElement("button");
-    this.btn.textContent = "START";
-    this.container=document.getElementById("main-container")
+    this.bottonStart = document.createElement("button");
+    this.bottonStart.textContent = "START";
+
   }
 
   setEvents() {
-    this.bottonStart.addEventListener("click", () => {
-      this.game.init();
-    });
+    this.bottonStart.addEventListener("click", () => this.game.start())
   }
-load(){
 
-  const pregunta = new Pregunta()
-  pregunta.render()
-}
   render() {
-   
-    this.game.container.append(this.bottonStart);
+
+    this.game.container.append(this.bottonStart)
   }
 }
 
-export default CounterPage;
+export default StartPage;
