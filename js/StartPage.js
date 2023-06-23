@@ -12,6 +12,7 @@ class StartPage {
     this.bottonStart = document.createElement("button");
     this.bottonStart.textContent = "START";
 
+  
   }
 
   setEvents() {
@@ -19,7 +20,6 @@ class StartPage {
   }
 
   render() {
-
     this.game.container.append(this.bottonStart)
   }
 }

@@ -9,7 +9,9 @@ class Game {
   constructor() {
 
     this.score = 0
-    this.quenstions = []
+
+    this.questions = []
+
     this.container = document.createElement('div')
     document.body.append(this.container)
     this.currentPage = undefined;
@@ -20,15 +22,15 @@ class Game {
 
   start() {
     this.score = 0
-    this.load(new Preguntas(this))
+    this.bringQuestions()
+    
   }
 
+
   updateRightAnswer() {
-    this.score += 5
 
     this.load(new PantallaFin(this))
   }
-
 
   load(page) {
 
@@ -36,9 +38,22 @@ class Game {
     this.currentPage = page;
     this.container.innerHTML = "";
     page.render();
-    
+
   }
-  
+
+  bringQuestions() {
+    fetch('https://the-trivia-api.com/v2/questions')
+      .then((res) => res.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          this.questions.push(data[i].question.text)
+        }
+        this.load(new Preguntas(this))
+        
+      })
+  }
+
+
 }
 
-export default Game;
+export default Game
