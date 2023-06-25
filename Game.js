@@ -1,68 +1,74 @@
-
-import StartPage from "./js/StartPage.js";
-import Preguntas from "./js/Preguntas.js";
-import PantallaFin from "./js/PantallaFin.js";
-
-
+import IntroView from './js/IntroView.js'
+import QuestionView from './js/QuestionView.js'
+import OutroView from './js/OutroView.js'
 
 class Game {
-  constructor() {
+	constructor() {
+		this.score = 0
+		this.container = document.createElement('div')
 
-    this.score = 0
+		this._introView = new IntroView(this)
+		this._questionViews = []
+		this._outroView = new OutroView(this)
 
-    this.questions = []
-  this.correctAnswers = ''
-  this.incorrectAnswers =[]
-  this.allAnswers= []
-    this.container = document.createElement('div')
-    document.body.append(this.container)
-    this.currentPage = undefined;
+		this._initGame()
+	}
 
-    this.load(new StartPage(this));
-  }
+	startQuiz() {
+		this.score = 0
+		this._bringQuestions()
+	}
 
+	checkAnswer(isCorrect) {
+		if (isCorrect) this.score += 5
 
-  start() {
-    this.score = 0
-    this.bringQuestions()
-  }
+		if (this._stillHasQuestion()) {
+			this._nextQuestion()
+		} else {
+			this._endQuiz()
+		}
+	}
 
+	_initGame() {
+		document.body.append(this.container)
 
-  updateRightAnswer() {
+		this._load(this._introView)
+	}
 
-    this.load(new PantallaFin(this))
-  }
+	_endQuiz() {
+		this._load(this._outroView)
+	}
 
-  load(page) {
+	_nextQuestion() {
+		this._load(this._questionViews.pop())
+	}
 
-    this.container.innerHTML = ""
-    this.currentPage = page;
-    this.container.innerHTML = "";
-    page.render();
+	_stillHasQuestion() {
+		return this._questionViews.length
+	}
 
-  }
+	_load(view) {
+		this.container.innerHTML = ''
 
-  bringQuestions() {
-    fetch('https://the-trivia-api.com/v2/questions')
+		view.render()
+	}
 
-    .then((res) => res.json())
-    .then((data) => {
-      for ( let i=0; i < data.length; i++){
-       this.questions.push(data[i].question.text)
-        this.incorrectAnswers.push(data[i].incorrectAnswers) 
-        this.correctAnswers.push(data[i].correctAnswers)
- 
-    }this.allAnswers= this.incorrectAnswers.push(this.correctAnswers) 
-   
-   }
-    ) 
-     }
-       
-         }
- 
+	_bringQuestions() {
+		fetch('https://the-trivia-api.com/v2/questions')
+			.then((res) => res.json())
+			.then((questions) => {
+				this._questionViews = questions.map(
+					(q) =>
+						new QuestionView(this, {
+							question: q.question.text,
+							incorrectAnswers: q.incorrectAnswers,
+							correctAnswer: q.correctAnswer,
+						})
+				)
 
-
-
+				this._nextQuestion()
+			})
+	}
 }
 
 export default Game
