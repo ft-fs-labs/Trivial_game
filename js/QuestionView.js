@@ -4,100 +4,72 @@ class QuestionView extends View {
 	constructor(game, questionDetails) {
 		super(game)
 
-		this._msForFeedback = 4000
-		this._msForNextQuestion = 2000
+		this.viewContainer.classList.add('view-question')
 
-		this._question = questionDetails.question
-		this._correctAnswer = questionDetails.correctAnswer
-		this._isCorrect = undefined
+		this.question = questionDetails.question
+		this.correctAnswer = questionDetails.correctAnswer
 
-		this._selectedAnswer = {
-			input: null,
-			label: null,
-		}
-
-		this._allAnswer = this._shuffleAnswer(
+		this.allAnswer = this.shuffleAnswersWithCorrect(
 			questionDetails.incorrectAnswers,
-			this._correctAnswer
+			this.correctAnswer
 		)
 
-		this._buildDOM()
-		this._attachEventHandlers()
+		this.msSuspense = 500
+		this.msFeedback = 500
+
+		this.buildDOM()
+		this.attachEventHandlers()
 	}
 
-	_buildDOM() {
+	buildDOM() {
 		const question = document.createElement('p')
-		question.innerText = this._question
+		question.innerText = this.question
 
-		this._viewContainer.append(question)
+		this.viewContainer.append(question)
 
-		this._allAnswer.forEach((answer, index) => {
+		this.allAnswer.forEach((answer, index) => {
 			const id = 'answer-' + index
 
 			const label = document.createElement('label')
-			label.innerText = answer
 			label.setAttribute('for', id)
+			label.innerText = answer
 
 			const input = document.createElement('input')
-			input.setAttribute('id', id)
 			input.setAttribute('type', 'radio')
+			input.setAttribute('id', id)
 			input.setAttribute('name', 'answer')
 			input.setAttribute('value', answer)
 
-			this._viewContainer.append(input, label)
+			this.viewContainer.append(input, label)
 		})
 	}
-
-	_attachEventHandlers() {
-		this._viewContainer.addEventListener('click', (event) => {
+	attachEventHandlers() {
+		this.viewContainer.addEventListener('click', (event) => {
 			if (event.target.tagName === 'LABEL') {
-				this._selectedAnswer.label = event.target
-				this._selectedAnswer.input = event.target.previousElementSibling
+				const label = event.target
 
-				this._lockForm()
-				this._changeStatus('pending')
+				const input = label.previousElementSibling
 
-				this._waitForFeedback(this._msForFeedback)
+				const isCorrect = input.value === this.correctAnswer
+
+				this.viewContainer.classList.add('disabled')
+				label.classList.add('pending')
+
+				setTimeout(() => {
+					label.classList.add(isCorrect ? 'success' : 'error')
+
+					setTimeout(() => this.game.checkAnswer(isCorrect), this.msFeedback)
+				}, this.msSuspense)
 			}
 		})
 	}
 
-	_lockForm() {
-		this._viewContainer.classList.add('disabled')
-	}
-
-	_changeStatus(statusClassName) {
-		this._selectedAnswer.label.classList.add(statusClassName)
-	}
-
-	_waitForFeedback(ms) {
-		setTimeout(() => {
-			this._isCorrect = this._checkAnswer(this._selectedAnswer.input.value)
-
-			this._changeStatus(this._isCorrect ? 'success' : 'error')
-
-			this._waitForNextQuestion(this._msForNextQuestion)
-		}, ms)
-	}
-
-	_checkAnswer(playerAnswer) {
-		return playerAnswer === this._correctAnswer
-	}
-
-	_waitForNextQuestion(ms) {
-		setTimeout(() => {
-			this.game.checkAnswer(this._isCorrect)
-		}, ms)
-	}
-
-	_shuffleAnswer(incorrectAnswers, correctAnswer) {
+	shuffleAnswersWithCorrect(incorrectAnswers, correctAnswer) {
 		const allAnswer = [...incorrectAnswers]
 
-		const randomIndex = Math.floor(
-			Math.random() * (incorrectAnswers.length + 1)
-		)
+		const index = Math.floor(Math.random() * (incorrectAnswers.length + 1))
 
-		allAnswer.splice(randomIndex, 0, correctAnswer)
+		allAnswer.splice(index, 0, correctAnswer)
 
 		return allAnswer
 	}

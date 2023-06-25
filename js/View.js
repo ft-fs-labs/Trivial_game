@@ -2,15 +2,14 @@ class View {
 	constructor(game) {
 		this.game = game
 
-		this._viewContainer = document.createElement('section')
+		this.viewContainer = document.createElement('section')
 	}
 
-	_buildDOM() {}
-
-	_attachEventHandlers() {}
+	buildDOM() {}
+	attachEventHandlers() {}
 
 	render() {
-		this.game.container.append(this._viewContainer)
+		this.game.container.append(this.viewContainer)
 	}
 }
 

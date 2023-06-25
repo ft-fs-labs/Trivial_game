@@ -7,66 +7,66 @@ class Game {
 		this.score = 0
 		this.container = document.createElement('div')
 
-		this._introView = new IntroView(this)
-		this._questionViews = []
-		this._outroView = new OutroView(this)
+		this.introView = new IntroView(this)
+		this.questionViews = []
+		this.outroView = new OutroView(this)
 
-		this._initGame()
+		this.initGame()
 	}
 
 	startQuiz() {
 		this.score = 0
-		this._bringQuestions()
+
+		this.bringQuestions()
 	}
 
 	checkAnswer(isCorrect) {
 		if (isCorrect) this.score += 5
 
-		if (this._stillHasQuestion()) {
-			this._nextQuestion()
+		if (this.stillHasQuestion()) {
+			this.nextQuestion()
 		} else {
-			this._endQuiz()
+			this.endQuiz()
 		}
 	}
 
-	_initGame() {
+	nextQuestion() {
+		this.load(this.questionViews.pop())
+	}
+
+	stillHasQuestion() {
+		return this.questionViews.length
+	}
+
+	endQuiz() {
+		this.load(this.outroView)
+	}
+
+	initGame() {
 		document.body.append(this.container)
 
-		this._load(this._introView)
+		this.load(this.introView)
 	}
 
-	_endQuiz() {
-		this._load(this._outroView)
-	}
-
-	_nextQuestion() {
-		this._load(this._questionViews.pop())
-	}
-
-	_stillHasQuestion() {
-		return this._questionViews.length
-	}
-
-	_load(view) {
+	load(view) {
 		this.container.innerHTML = ''
-
 		view.render()
 	}
 
-	_bringQuestions() {
+	bringQuestions() {
 		fetch('https://the-trivia-api.com/v2/questions')
 			.then((res) => res.json())
 			.then((questions) => {
-				this._questionViews = questions.map(
+				this.questionViews = questions.map(
 					(q) =>
 						new QuestionView(this, {
 							question: q.question.text,
-							incorrectAnswers: q.incorrectAnswers,
 							correctAnswer: q.correctAnswer,
+							incorrectAnswers: q.incorrectAnswers,
 						})
 				)
 
-				this._nextQuestion()
+				this.nextQuestion()
 			})
 	}
 }

@@ -4,21 +4,21 @@ class IntroView extends View {
 	constructor(game) {
 		super(game)
 
-		this._buildDOM()
-		this._attachEventHandlers()
+		this.buildDOM()
+		this.attachEventHandlers()
 	}
 
-	_buildDOM() {
+	buildDOM() {
 		const startButton = document.createElement('button')
-		startButton.textContent = 'START'
+		startButton.innerText = 'START'
 
-		this._viewContainer.append(startButton)
+		this.viewContainer.append(startButton)
 	}
 
-	_attachEventHandlers() {
-		this._viewContainer
-			.querySelector('button')
-			.addEventListener('click', () => this.game.startQuiz())
+	attachEventHandlers() {
+		this.viewContainer.querySelector('button').addEventListener('click', () => {
+			this.game.startQuiz()
+		})
 	}
 }
 

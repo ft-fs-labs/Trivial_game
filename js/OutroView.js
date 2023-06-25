@@ -4,30 +4,29 @@ class OutroView extends View {
 	constructor(game) {
 		super(game)
 
-		this._buildDOM()
-		this._attachEventHandlers()
+		this.buildDOM()
+		this.attachEventHandlers()
 	}
-	_buildDOM() {
+
+	buildDOM() {
 		const scoreScreen = document.createElement('p')
 
 		const startAnotherGameButton = document.createElement('button')
-		startAnotherGameButton.innerText = 'Volver a cargar el juego'
+		startAnotherGameButton.innerText = 'START ANOTHER GAME'
 
-		this._viewContainer.append(scoreScreen, startAnotherGameButton)
+		this.viewContainer.append(scoreScreen, startAnotherGameButton)
 	}
 
-	_attachEventHandlers() {
-		this._viewContainer
-			.querySelector('button')
-			.addEventListener('click', () => {
-				this.game.startQuiz()
-			})
+	attachEventHandlers() {
+		this.viewContainer.querySelector('button').addEventListener('click', () => {
+			this.game.startQuiz()
+		})
 	}
 
 	render() {
-		this._viewContainer.querySelector(
+		this.viewContainer.querySelector(
 			'p'
-		).textContent = `Score: ${this.game.score}`
+		).innerText = `Tu puntuación es: ${this.game.score}`
 
 		super.render()
 	}

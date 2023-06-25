@@ -1,94 +1,103 @@
-* {
-	margin: 0px;
-	padding: 0px;
+html {
 	box-sizing: border-box;
 }
-body {
-	margin: 0 auto;
-}
-body > div {
-	margin: 0 auto;
-	padding: 2rem;
-	text-align: center;
-}
-button {
-	background-color: blueviolet;
-	height: 100px;
-	padding: 20px;
-	font-size: x-large;
-}
-button:active {
-	background-color: brown;
-}
-p {
-	background-color: aliceblue;
-	line-height: 100px;
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
 }
 
-section {
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+}
+
+body > div {
+	text-align: center;
+	padding: 1rem 2rem;
+}
+
+button {
+	background-color: #444;
+	color: white;
+	border: 0;
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	cursor: pointer;
+}
+button:hover {
+	background-color: #666;
+}
+button:active {
+	background-color: #222;
+}
+
+section > p {
+	background-color: aliceblue;
+	padding: 2rem;
+}
+
+section.view-question {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 }
 
-label {
+section.view-question label {
 	border: 1px dotted #ccc;
-	line-height: 50px;
+	padding: 1rem;
 	cursor: pointer;
-}
-
-input {
-	position: absolute;
-	visibility: hidden;
 }
 
 @keyframes pending {
 	0% {
-		background-color: #f0f8ffdd;
-	}
-
-	50% {
 		background-color: #f0f8ff00;
 	}
-	100% {
-		background-color: #f0f8ffdd;
+	50% {
+		background-color: #f0f8ffff;
 	}
-}
-
-@keyframes success {
-	0% {
-		background-color: #73fab200;
-	}
-
 	100% {
-		background-color: #73fab2dd;
+		background-color: #f0f8ff00;
 	}
 }
 
 @keyframes error {
 	0% {
-		background-color: #fa737300;
+		background-color: #ff3b5f00;
 	}
 
 	100% {
-		background-color: #fa7373dd;
+		background-color: #ff3b5f66;
 	}
 }
 
-section.disabled label {
+@keyframes success {
+	0% {
+		background-color: #3bff8600;
+	}
+
+	100% {
+		background-color: #3bff8666;
+	}
+}
+section.view-question.disabled {
 	pointer-events: none;
 }
 
-input:checked + label.pending {
+section.view-question input:checked + label.pending {
 	animation: 1s pending infinite;
 }
-
-input:checked + label.success {
-	animation: 1s success infinite ease-in-out forwards;
+section.view-question input:checked + label.error {
+	animation: 0.5s error ease-in-out forwards;
+	animation-iteration-count: 1;
+}
+section.view-question input:checked + label.success {
+	animation: 0.5s success ease-in-out forwards;
 	animation-iteration-count: 1;
 }
 
-input:checked + label.error {
-	animation: 1s error infinite ease-in-out forwards;
-	animation-iteration-count: 1;
+section.view-question input {
+	position: absolute;
+	visibility: hidden;
 }
